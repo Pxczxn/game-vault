@@ -1,17 +1,20 @@
 package top.pxczxn.gamevault.system;
 
-import top.pxczxn.gamevault.model.UserAccount;
+import top.pxczxn.gamevault.model.AccountManager;
 
 import java.util.Scanner;
 
 public class UserVO {
-    Scanner sc =new Scanner(System.in);
-    public void Login(){
-        System.out.print("取个满意的昵称：");
+
+    public static void Login(){
+        Scanner sc =new Scanner(System.in);
+        System.out.print("取个满意的ID：");
         String userId=sc.nextLine();
+        System.out.print("取个满意的昵称：");
         String userName = sc.nextLine();
+        System.out.print("输入您的密码：");
         String userPassword=sc.nextLine();
-        UserAccount user =new UserAccount(userId,userName,userPassword);
+        AccountManager.accountInfo(userId,userName,userPassword);
     }
 
 }
