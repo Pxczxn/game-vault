@@ -5,6 +5,15 @@ public class Account {
     private String id;
     private String name;
     private String password;
+    private String Propertyid;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getId() {
         return id;
@@ -22,12 +31,12 @@ public class Account {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPropertyid() {
+        return Propertyid;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPropertyid(String propertyid) {
+        Propertyid = propertyid;
     }
 
     public Account(){

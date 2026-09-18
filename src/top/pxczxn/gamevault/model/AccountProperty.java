@@ -27,6 +27,6 @@ public class AccountProperty {
     }
 
     public void setPropertyid(String propertyid) {
-        Propertyid = propertyid;
+        this.Propertyid=propertyid;
     }
 }

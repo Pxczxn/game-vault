@@ -2,8 +2,7 @@ package top.pxczxn.gamevault.system;
 
 import java.util.Scanner;
 
-import static top.pxczxn.gamevault.model.AccountManager.accountFindAll;
-import static top.pxczxn.gamevault.model.AccountManager.accounts;
+import static top.pxczxn.gamevault.model.AccountManager.*;
 
 public class Menu {
     public void init(){
@@ -25,7 +24,7 @@ public class Menu {
             switch (choose){
                 case 1-> UserVO.Login();
                 case 2-> System.out.println(choose);
-                case 3-> accountFindAll(accounts);
+                case 3-> accountFindAll(accounts,properties);
                 case 4-> System.out.println(choose);
                 case 5-> System.out.println(choose);
                 case 6-> System.exit(0);
