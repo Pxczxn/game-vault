@@ -1,17 +1,10 @@
 package top.pxczxn.gamevault.model;
 
+
 public class UserAccount {
     private String id;
     private String name;
-    private int password;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String password;
 
     public String getName() {
         return name;
@@ -21,11 +14,25 @@ public class UserAccount {
         this.name = name;
     }
 
-    public int getPassword() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserAccount(String id, String name, String password){
+        this.id=id;
+        this.name= name;
+        this.password=password;
     }
 }
