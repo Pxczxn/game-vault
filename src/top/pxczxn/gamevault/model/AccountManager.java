@@ -39,11 +39,11 @@ public class AccountManager {
         int num_account = 0;
         String propertyid = "0";
         for (int i = 0; i < accounts.size(); i++) {
-            acconut_id = accounts.get(i).getId();
             if (acconut_id.equals(id)) {
                 num_account = i;
                 break;
             }
+            acconut_id = accounts.get(i).getId();
         }
         String account_propertyid = accounts.get(num_account).getPropertyid();
         for (int j = 0; j < properties.size(); j++) {
@@ -51,11 +51,11 @@ public class AccountManager {
                 propertyid = properties.get(j).getPropertyid();
             }
         }
-        return "id：" + accounts.get(num_account).getId() +
-                " 用户名：" + accounts.get(num_account).getName() +
-                " 密码：" + passworjEncrypt(accounts.get(num_account).getPassword()) +
-                " 等级：" + getProperties(properties, propertyid).getLevel() +
-                " 金币：" + getProperties(properties, propertyid).getGold();
+        return getAccount(accounts,acconut_id,"id")+" "+
+                getAccount(accounts,acconut_id,"name")+" "+
+                getAccount(accounts,acconut_id,"password")+" "+
+                getProperties(properties,propertyid,"level")+" "+
+                getProperties(properties,propertyid,"gold");
     }
 
     //创建账号
@@ -77,14 +77,35 @@ public class AccountManager {
         return resule.toString();
     }
 
-    //查询账号资产
-    public static AccountProperty getProperties(ArrayList<AccountProperty> properties, String properrtyId) {
-        int num = 0;
+    //查询账号信息
+    public static String getAccount(ArrayList<Account> properties,String accountId,String account){
+        int num =0;
+        String acconutId="";
+        String acconutName="";
+        String acconutPassword="";
         for (int i = 0; i < properties.size(); i++) {
-            if (properties.get(i).equals(properrtyId)) {
+            if (properties.get(i).getId().equals(accountId)){
+                num=i;
+            }
+        }
+        acconutId="id："+properties.get(num).getId();
+        acconutName="昵称："+properties.get(num).getName();
+        acconutPassword="密码："+passworjEncrypt(properties.get(num).getPassword());
+        return account.equals("id")?acconutId:(account.equals("name")?acconutName:acconutPassword);
+    }
+
+    //查询账号资产
+    public static String getProperties(ArrayList<AccountProperty> properties, String properrtyId,String property) {
+        int num = 0;
+        String level="";
+        String gold="";
+        for (int i = 0; i < properties.size(); i++) {
+            if ((properties.get(i)).getPropertyid().equals(properrtyId)) {
                 num = i;
             }
         }
-        return properties.get(num);
+        level = "等级："+properties.get(num).getLevel();
+        gold = "金币："+ properties.get(num).getGold();
+        return property.equals("level")?level:gold;
     }
 }

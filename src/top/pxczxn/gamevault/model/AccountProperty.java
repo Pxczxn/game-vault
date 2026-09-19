@@ -3,7 +3,7 @@ package top.pxczxn.gamevault.model;
 public class AccountProperty {
     private String Propertyid;
     private int level;
-    private long gold;
+    private int gold;
 
 
     public int getLevel() {
@@ -14,11 +14,11 @@ public class AccountProperty {
         this.level = level;
     }
 
-    public long getGold() {
+    public int getGold() {
         return gold;
     }
 
-    public void setGold(long gold) {
+    public void setGold(int gold) {
         this.gold = gold;
     }
 
