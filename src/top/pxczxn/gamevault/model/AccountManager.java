@@ -70,13 +70,13 @@ public class AccountManager {
                 System.out.println("不能跟就昵称一样哦~");
             } else {
                 if (checkRegisterInput(name, "name")) {
-                    account.setName(name);
                     System.out.print("输入您的新密码呢：");
                     password = sc.nextLine();
                     if (password.equals(account.getPassword())) {
                         System.out.println("不能跟旧密码一样哦~");
                     } else {
                         if (checkRegisterInput(password, "password")) {
+                            account.setName(name);
                             account.setPassword(password);
                             System.out.print("更新成功！！！");
                         } else {
