@@ -35,7 +35,7 @@ public class AccountManager {
     }
 
     //查询指定账号
-    public static String accountFind(ArrayList<Account> accounts, ArrayList<AccountProperty> properties, String id) {
+    public static String accountFind (String id) {
         String acconut_id = "0";
         int num_account = 0;
         String propertyid = "0";

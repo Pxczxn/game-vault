@@ -58,7 +58,7 @@ public class accountUtil {
         }
         level = "等级：" + properties.get(num).getLevel();
         gold = "金币：" + properties.get(num).getGold();
-        return "等级：" + level + " gold:" + gold;
+        return " 等级：" + level + " gold:" + gold;
     }
 
     //注册校验
@@ -84,6 +84,21 @@ public class accountUtil {
         }
         return flag;
     }
+
+    public static Account findAccountById(String id){
+        boolean flag=false;
+        int num=-1;
+        for (int i = 0; i < accounts.size(); i++) {
+            if (id.equals(accounts.get(i).getId())){
+                flag= true;
+                num=i;
+                break;
+            }
+        }
+        return flag?accounts.get(num):null;
+
+    }
+
 
     //随机六位数
     public static int ramdomSixNum() {

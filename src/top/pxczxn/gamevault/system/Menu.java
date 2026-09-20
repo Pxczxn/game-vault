@@ -3,6 +3,7 @@ package top.pxczxn.gamevault.system;
 import java.util.Scanner;
 
 import static top.pxczxn.gamevault.model.AccountManager.*;
+import static top.pxczxn.gamevault.system.AccountVO.Login;
 
 public class Menu {
     public void init(){
@@ -22,8 +23,8 @@ public class Menu {
             int choose = sc.nextInt();
 
             switch (choose){
-                case 1-> AccountVO.Login();
-                case 2-> System.out.println(choose);
+                case 1-> AccountVO.Logup();
+                case 2-> Login();
                 case 3-> accountFindAll(accounts,properties);
                 case 4-> System.out.println(choose);
                 case 5-> System.out.println(choose);
