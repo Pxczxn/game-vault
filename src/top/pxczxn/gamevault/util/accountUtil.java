@@ -12,11 +12,7 @@ import static top.pxczxn.gamevault.model.AccountManager.properties;
 public class accountUtil {
     //加密密码
     public static String passworjEncrypt(String password) {
-        StringBuilder resule = new StringBuilder();
-        for (int i = 0; i < password.length(); i++) {
-            resule.append("*");
-        }
-        return resule.toString();
+        return "*";
     }
 
     //创建账号

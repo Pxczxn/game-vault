@@ -1,6 +1,7 @@
 package top.pxczxn.gamevault.model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static top.pxczxn.gamevault.util.accountUtil.*;
 
@@ -25,17 +26,17 @@ public class AccountManager {
     }
 
     //查询所有账号信息
-    public static void accountFindAll(ArrayList<Account> accounts,ArrayList<AccountProperty> properties) {
+    public static void accountFindAll(ArrayList<Account> accounts, ArrayList<AccountProperty> properties) {
 
         for (int i = 0; i < accounts.size(); i++) {
-            String message = getAccount(accounts,accounts.get(i).getId())+
-                            getProperties(properties,properties.get(i).getPropertyid());
+            String message = getAccount(accounts, accounts.get(i).getId()) +
+                    getProperties(properties, properties.get(i).getPropertyid());
             System.out.println(message);
         }
     }
 
     //查询指定账号
-    public static String accountFind (String id) {
+    public static String accountFind(String id) {
         String acconut_id = "0";
         int num_account = 0;
         String propertyid = "0";
@@ -52,7 +53,43 @@ public class AccountManager {
                 propertyid = properties.get(j).getPropertyid();
             }
         }
-        return getAccount(accounts,acconut_id)+getProperties(properties,propertyid);
+        return getAccount(accounts, acconut_id) + getProperties(properties, propertyid);
     }
 
+    public static void updateAccount() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("输入您的id：");
+        String id = sc.nextLine();
+        String name;
+        String password;
+        Account account = findAccountById(id);
+        if (account != null) {
+            System.out.print("您想改成什么昵称？");
+            name = sc.nextLine();
+            if (name.equals(account.getName())) {
+                System.out.println("不能跟就昵称一样哦~");
+            } else {
+                if (checkRegisterInput(name, "name")) {
+                    account.setName(name);
+                    System.out.print("输入您的新密码呢：");
+                    password = sc.nextLine();
+                    if (password.equals(account.getPassword())) {
+                        System.out.println("不能跟旧密码一样哦~");
+                    } else {
+                        if (checkRegisterInput(password, "password")) {
+                            account.setPassword(password);
+                            System.out.print("更新成功！！！");
+                        } else {
+                            System.out.println("密码格式无效呢，请重新设置呢~（至少6位数）");
+                        }
+                    }
+                } else {
+                    System.out.println("昵称不能为空哦~");
+                }
+            }
+        } else {
+            System.out.println("您得账号似乎还没注册呢~");
+        }
+    }
 }
+

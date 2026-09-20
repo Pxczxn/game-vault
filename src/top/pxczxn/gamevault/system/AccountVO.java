@@ -33,7 +33,7 @@ public class AccountVO {
         while (true) {
             userPassword = sc.nextLine();
             if (!checkRegisterInput(userPassword, "password")) {
-                System.out.println("密码格式不合格，请重新设置呢~（至少6位数）");
+                System.out.println("密码格式无效呢，请重新设置呢~（至少6位数）");
             } else {
                 break;
             }

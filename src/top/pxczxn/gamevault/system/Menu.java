@@ -26,7 +26,7 @@ public class Menu {
                 case 1-> AccountVO.Logup();
                 case 2-> Login();
                 case 3-> accountFindAll(accounts,properties);
-                case 4-> System.out.println(choose);
+                case 4-> updateAccount();
                 case 5-> System.out.println(choose);
                 case 6-> System.exit(0);
             }
