@@ -22,7 +22,7 @@ public class Menu {
             int choose = sc.nextInt();
 
             switch (choose){
-                case 1-> UserVO.Login();
+                case 1-> AccountVO.Login();
                 case 2-> System.out.println(choose);
                 case 3-> accountFindAll(accounts,properties);
                 case 4-> System.out.println(choose);
