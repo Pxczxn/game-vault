@@ -29,15 +29,21 @@ public class AccountManager {
     public static void accountFindAll() {
         System.out.println("====================== 所有账号列表 ========================");
         for (int i = 0; i < accounts.size(); i++) {
-            String message = getAccount(accounts.get(i).getId()) +
-                    getProperties(properties.get(i).getPropertyid());
-            System.out.println(message);
+            Account account = findAccountByIndex(i);
+            if (account!=null){
+                System.out.println("id："+account.getId()+
+                                    " 昵称："+account.getName()+
+                                    " 密码："+"*"+
+                                    " 等级："+ (findPropertyByIndex(findAccountIndexById(account.getPropertyid())).getLevel()) +
+                                    " 金币："+(findPropertyByIndex(findAccountIndexById(account.getPropertyid())).getGold()));
+            }
+
         }
     }
 
     //查询指定账号
     public static String accountFind(String id) {
-        Account account = findAccountById(id);
+        Account account = findAccountByIndex(findAccountIndexById(id));
         AccountProperty property;
         boolean flag=false;
         String accountMessage = "";
@@ -46,7 +52,7 @@ public class AccountManager {
         if (account==null) {
             System.out.println("您得账号似乎还没注册呢~");
         }else {
-            property = findPropertiesByPropertyid(account.getPropertyid());
+            property = findPropertyByIndex(findAccountIndexById(accountProperty));
             accountMessage=getAccount(account.getId());
             accountProperty=getProperties(property.getPropertyid());
             flag=true;
@@ -64,7 +70,7 @@ public class AccountManager {
         String id = sc.nextLine();
         String name;
         String password;
-        Account account = findAccountById(id);
+        Account account = findAccountByIndex(findAccountIndexById(id));
         if (account != null) {
             System.out.print("你的新昵称？");
             name = sc.nextLine();
@@ -100,7 +106,7 @@ public class AccountManager {
         System.out.print("输入您要删除账号的id：");
         String id = sc.nextLine();
         if (id.length() == 6) {
-            Account deleteaccount = findAccountById(id);
+            Account deleteaccount = findAccountByIndex(findAccountIndexById(id));
             if (deleteaccount != null) {
                 System.out.print("输入您的密码：");
                 String password = sc.nextLine();
@@ -110,7 +116,7 @@ public class AccountManager {
                     System.out.print("您真的要删除吗？（Y/N）");
                     String check = sc.nextLine();
                     if (check.equals("Y") | check.equals("y")) {
-                        AccountProperty deleteproperty = findPropertiesByPropertyid(deleteaccount.getPropertyid());
+                        AccountProperty deleteproperty = findPropertyByIndex(findPropertyIndexByPropertyId(findAccountByIndex(findAccountIndexById(id)).getPropertyid()));
                         properties.remove(deleteproperty);
                         accounts.remove(deleteaccount);
                         System.out.println("删除成功，我会想你的~");

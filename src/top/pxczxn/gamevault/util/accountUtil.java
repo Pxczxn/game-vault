@@ -22,27 +22,14 @@ public class accountUtil {
 
     //查询账号信息
     public static String getAccount(String accountId) {
-        int num = 0;
-        for (int i = 0; i < accounts.size(); i++) {
-            if (accounts.get(i).getId().equals(accountId)) {
-                num = i;
-            }
-        }
-        String acconutId = accounts.get(num).getId();
-        String acconutName = accounts.get(num).getName();
-        return "id：" + acconutId + " 昵称：" + acconutName + " 密码：" + "*";
+        return "id：" + accountId + " 昵称：" +
+                accounts.get(findAccountIndexById(accountId)).getName() + " 密码：" + "*";
     }
 
     //查询账号资产
     public static String getProperties( String properrtyId) {
-        int num = 0;
-        for (int i = 0; i < properties.size(); i++) {
-            if ((properties.get(i)).getPropertyid().equals(properrtyId)) {
-                num = i;
-            }
-        }
-        String level = "等级：" + properties.get(num).getLevel();
-        String gold = "金币：" + properties.get(num).getGold();
+        String level = "等级：" + findPropertyByIndex(findPropertyIndexByPropertyId(properrtyId)).getLevel();
+        String gold = "金币：" + findPropertyByIndex(findPropertyIndexByPropertyId(properrtyId)).getGold();
         return  level +  gold;
     }
 
@@ -71,30 +58,39 @@ public class accountUtil {
         return flag;
     }
 
-    public static Account findAccountById(String id){
-        boolean flag=false;
-        int num=-1;
-        for (int i = 0; i < accounts.size(); i++) {
-            if (id.equals(accounts.get(i).getId())){
-                flag= true;
-                num=i;
-                break;
-            }
-        }
-        return flag?accounts.get(num):null;
+    //通过账号索引找账号
+    public static Account findAccountByIndex(int index){
+
+        return accounts.get(index);
 
     }
 
-    public static AccountProperty findPropertiesByPropertyid(String propertyid){
-        int num=-1;
-        for (int i = 0; i < properties.size(); i++) {
-            if (propertyid.equals(properties.get(i).getPropertyid())){
-                num=i;
-                break;
+    //通过资产索引找资产
+    public static AccountProperty findPropertyByIndex(int index){
+        return properties.get(index);
+    }
+
+
+    //通过id找账号索引
+    public static int findAccountIndexById(String id){
+        int index = 0;
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getId().equals(id)){
+                index=i;
             }
         }
-        return properties.get(num);
+        return index;
+    }
 
+    //通过资产id找资产索引
+    public static int findPropertyIndexByPropertyId(String propertyId){
+        int index=0;
+        for (int i = 0; i < properties.size(); i++) {
+            if (properties.get(i).getPropertyid().equals(propertyId)){
+                index=i;
+            }
+        }
+        return index;
     }
 
 

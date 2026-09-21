@@ -48,7 +48,7 @@ public class AccountVO {
         System.out.print("请入您的id：");
         String id=sc.nextLine();
         if (id.length()==6) {
-            Account loginAccount = findAccountById(id);
+            Account loginAccount = findAccountByIndex(findAccountIndexById(id));
             if (loginAccount == null) {
                 System.out.println("您得账号似乎还没注册呢~");
             } else {
