@@ -36,8 +36,6 @@ public class AccountManager {
                         " 密码：" + "*" +
                         " 等级：" + findPropertyByIndex(findPropertyIndexByPropertyId(account.getPropertyid())).getLevel() +
                         " 金币：" + findPropertyByIndex(findPropertyIndexByPropertyId(account.getPropertyid())).getGold());
-            }else {
-                System.out.println("空空如也~~~");
             }
 
         }
@@ -47,20 +45,12 @@ public class AccountManager {
     public static String accountFind(String id) {
         Account account = findAccountByIndex(findAccountIndexById(id));
         AccountProperty property;
-        boolean flag = false;
-        String accountMessage = "";
-        String accountProperty = "";
-        String message = "";
-        if (account == null) {
-            System.out.println("您得账号似乎还没注册呢~");
-        } else {
-            property = findPropertyByIndex(findAccountIndexById(accountProperty));
-            accountMessage = getAccount(account.getId());
-            accountProperty = getProperties(property.getPropertyid());
-            flag = true;
-        }
-        if (flag) {
-            message = accountMessage + accountProperty;
+        String message="您的账号似乎还没注册呢~";
+        if (account != null) {
+            property = findPropertyByIndex(findAccountIndexById(account.getPropertyid()));
+            String accountMessage = getAccount(account.getId());
+            String accountProperty = getProperties(property.getPropertyid());
+            message=accountMessage+accountProperty;
         }
 
         return message;
