@@ -51,7 +51,7 @@ public class AccountManager {
             accountProperty=getProperties(property.getPropertyid());
             flag=true;
         }
-        if (!flag){
+        if (flag){
            message = accountMessage+accountProperty;
         }
 
