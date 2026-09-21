@@ -13,13 +13,13 @@ public class AccountVO {
     public static void Logup() {
         Scanner sc = new Scanner(System.in);
         String userId;
-        userId = "";
+        userId = "000000";
         String userName;
         String userPassword;
         while (!checkRegisterInput(userId, "id")) {
             userId = String.valueOf(ramdomSixNum());
         }
-        System.out.println(userId);
+        System.out.println("您的id，请务必保管好："+userId);
 
         System.out.print("取个满意的昵称：");
         while (true) {
