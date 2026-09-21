@@ -26,37 +26,38 @@ public class AccountManager {
     }
 
     //查询所有账号信息
-    public static void accountFindAll(ArrayList<Account> accounts, ArrayList<AccountProperty> properties) {
-
+    public static void accountFindAll() {
+        System.out.println("====================== 所有账号列表 ========================");
         for (int i = 0; i < accounts.size(); i++) {
-            String message = getAccount(accounts, accounts.get(i).getId()) +
-                    getProperties(properties, properties.get(i).getPropertyid());
-            System.out.println("====================== 所有账号列表 ========================");
+            String message = getAccount(accounts.get(i).getId()) +
+                    getProperties(properties.get(i).getPropertyid());
             System.out.println(message);
         }
     }
 
     //查询指定账号
     public static String accountFind(String id) {
-        String acconut_id = "0";
-        int num_account = 0;
-        String propertyid = "0";
-        for (int i = 0; i < accounts.size(); i++) {
-            if (acconut_id.equals(id)) {
-                num_account = i;
-                break;
-            }
-            acconut_id = accounts.get(i).getId();
+        Account account = findAccountById(id);
+        AccountProperty property;
+        boolean flag=false;
+        String accountMessage = "";
+        String accountProperty = "";
+        String message = "";
+        if (account==null) {
+            System.out.println("您得账号似乎还没注册呢~");
+        }else {
+            property = findPropertiesByPropertyid(account.getPropertyid());
+            accountMessage=getAccount(account.getId());
+            accountProperty=getProperties(property.getPropertyid());
+            flag=true;
         }
-        String account_propertyid = accounts.get(num_account).getPropertyid();
-        for (int j = 0; j < properties.size(); j++) {
-            if (account_propertyid.equals(properties.get(j).getPropertyid())) {
-                propertyid = properties.get(j).getPropertyid();
-            }
+        if (!flag){
+           message = accountMessage+accountProperty;
         }
-        return getAccount(accounts, acconut_id) + getProperties(properties, propertyid);
-    }
 
+        return message;
+    }
+    //修改账号
     public static void updateAccount() {
         Scanner sc = new Scanner(System.in);
         System.out.print("输入您的id：");
@@ -93,6 +94,7 @@ public class AccountManager {
         }
     }
 
+    //删除账号
     public static void deleteAccount() {
         Scanner sc = new Scanner(System.in);
         System.out.print("输入您要删除账号的id：");
@@ -108,7 +110,7 @@ public class AccountManager {
                     System.out.print("您真的要删除吗？（Y/N）");
                     String check = sc.nextLine();
                     if (check.equals("Y") | check.equals("y")) {
-                        AccountProperty deleteproperty = findPropertieByPropertyid(deleteaccount.getPropertyid());
+                        AccountProperty deleteproperty = findPropertiesByPropertyid(deleteaccount.getPropertyid());
                         properties.remove(deleteproperty);
                         accounts.remove(deleteaccount);
                         System.out.println("删除成功，我会想你的~");

@@ -25,7 +25,7 @@ public class Menu {
             switch (choose){
                 case 1-> AccountVO.Logup();
                 case 2-> Login();
-                case 3-> accountFindAll(accounts,properties);
+                case 3-> accountFindAll();
                 case 4-> updateAccount();
                 case 5-> deleteAccount();
                 case 6-> System.exit(0);

@@ -12,9 +12,10 @@ public class AccountVO {
     //注册
     public static void Logup() {
         Scanner sc = new Scanner(System.in);
-        String userId = "000000";
-        String userName = "";
-        String userPassword = "";
+        String userId;
+        userId = "";
+        String userName;
+        String userPassword;
         while (!checkRegisterInput(userId, "id")) {
             userId = String.valueOf(ramdomSixNum());
         }

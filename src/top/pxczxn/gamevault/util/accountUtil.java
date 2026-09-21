@@ -3,17 +3,12 @@ package top.pxczxn.gamevault.util;
 import top.pxczxn.gamevault.model.Account;
 import top.pxczxn.gamevault.model.AccountProperty;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static top.pxczxn.gamevault.model.AccountManager.accounts;
 import static top.pxczxn.gamevault.model.AccountManager.properties;
 
 public class accountUtil {
-    //加密密码
-    public static String passworjEncrypt(String password) {
-        return "*";
-    }
 
     //创建账号
     public static Account accountCreate() {
@@ -26,35 +21,29 @@ public class accountUtil {
     }
 
     //查询账号信息
-    public static String getAccount(ArrayList<Account> properties, String accountId) {
+    public static String getAccount(String accountId) {
         int num = 0;
-        String acconutId = "";
-        String acconutName = "";
-        String acconutPassword = "";
         for (int i = 0; i < properties.size(); i++) {
-            if (properties.get(i).getId().equals(accountId)) {
+            if (accounts.get(i).getId().equals(accountId)) {
                 num = i;
             }
         }
-        acconutId = properties.get(num).getId();
-        acconutName = properties.get(num).getName();
-        acconutPassword = passworjEncrypt(properties.get(num).getPassword());
-        return "id：" + acconutId + " 昵称：" + acconutName + " 密码：" + acconutPassword;
+        String acconutId = accounts.get(num).getId();
+        String acconutName = accounts.get(num).getName();
+        return "id：" + acconutId + " 昵称：" + acconutName + " 密码：" + "*";
     }
 
     //查询账号资产
-    public static String getProperties(ArrayList<AccountProperty> properties, String properrtyId) {
+    public static String getProperties( String properrtyId) {
         int num = 0;
-        String level = "";
-        String gold = "";
         for (int i = 0; i < properties.size(); i++) {
             if ((properties.get(i)).getPropertyid().equals(properrtyId)) {
                 num = i;
             }
         }
-        level = "等级：" + properties.get(num).getLevel();
-        gold = "金币：" + properties.get(num).getGold();
-        return " 等级：" + level + " gold:" + gold;
+        String level = "等级：" + properties.get(num).getLevel();
+        String gold = "金币：" + properties.get(num).getGold();
+        return  level +  gold;
     }
 
     //注册校验
@@ -65,6 +54,7 @@ public class accountUtil {
             for (int i = 0; i < accounts.size(); i++) {
                 if (message.equals(accounts.get(i).getId())) {
                     flag = false;
+                    break;
                 }
             }
         }
@@ -95,7 +85,7 @@ public class accountUtil {
 
     }
 
-    public static AccountProperty findPropertieByPropertyid(String propertyid){
+    public static AccountProperty findPropertiesByPropertyid(String propertyid){
         int num=-1;
         for (int i = 0; i < properties.size(); i++) {
             if (propertyid.equals(properties.get(i).getPropertyid())){
@@ -115,21 +105,15 @@ public class accountUtil {
     }
 
     public static void adminAccountInfo() {
-        String adminId = "000000";
-        String adminname = "破星辰只寻你";
-        String adminpassword = "pxczxn000";
-        String adminpropertieId = "000000";
-        int adminlevel = 1;
-        int admingold = 0;
         Account adminaccount = accountCreate();
         AccountProperty accountProperty = propertyCreate();
-        adminaccount.setId(adminId);
-        adminaccount.setName(adminname);
-        adminaccount.setPassword(adminpassword);
-        adminaccount.setPropertyid(adminpropertieId);
-        accountProperty.setPropertyid(adminpropertieId);
-        accountProperty.setLevel(adminlevel);
-        accountProperty.setGold(admingold);
+        adminaccount.setId("000000");
+        adminaccount.setName("破星辰只寻你");
+        adminaccount.setPassword("pxczxn000");
+        adminaccount.setPropertyid("000000");
+        accountProperty.setPropertyid("000000");
+        accountProperty.setLevel(1);
+        accountProperty.setGold(0);
         accounts.addFirst(adminaccount);
         properties.addFirst(accountProperty);
     }
