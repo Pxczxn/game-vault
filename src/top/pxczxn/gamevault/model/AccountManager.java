@@ -34,8 +34,7 @@ public class AccountManager {
                 System.out.println("id：" + account.getId() +
                         " 昵称：" + account.getName() +
                         " 密码：" + "*" +
-                        " 等级：" + findPropertyByIndex(findPropertyIndexByPropertyId(account.getPropertyid())).getLevel() +
-                        " 金币：" + findPropertyByIndex(findPropertyIndexByPropertyId(account.getPropertyid())).getGold());
+                        getProperties(account.getPropertyid()));
             }
 
         }
@@ -44,12 +43,10 @@ public class AccountManager {
     //查询指定账号
     public static String accountFind(String id) {
         Account account = findAccountByIndex(findAccountIndexById(id));
-        AccountProperty property;
         String message="您的账号似乎还没注册呢~";
         if (account != null) {
-            property = findPropertyByIndex(findAccountIndexById(account.getPropertyid()));
             String accountMessage = getAccount(account.getId());
-            String accountProperty = getProperties(property.getPropertyid());
+            String accountProperty = getProperties(account.getPropertyid());
             message=accountMessage+accountProperty;
         }
 
