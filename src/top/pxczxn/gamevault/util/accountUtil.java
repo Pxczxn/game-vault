@@ -95,6 +95,18 @@ public class accountUtil {
 
     }
 
+    public static AccountProperty findPropertieByPropertyid(String propertyid){
+        int num=-1;
+        for (int i = 0; i < properties.size(); i++) {
+            if (propertyid.equals(properties.get(i).getPropertyid())){
+                num=i;
+                break;
+            }
+        }
+        return properties.get(num);
+
+    }
+
 
     //随机六位数
     public static int ramdomSixNum() {

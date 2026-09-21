@@ -31,6 +31,7 @@ public class AccountManager {
         for (int i = 0; i < accounts.size(); i++) {
             String message = getAccount(accounts, accounts.get(i).getId()) +
                     getProperties(properties, properties.get(i).getPropertyid());
+            System.out.println("====================== 所有账号列表 ========================");
             System.out.println(message);
         }
     }
@@ -64,10 +65,10 @@ public class AccountManager {
         String password;
         Account account = findAccountById(id);
         if (account != null) {
-            System.out.print("您想改成什么昵称？");
+            System.out.print("你的新昵称？");
             name = sc.nextLine();
             if (name.equals(account.getName())) {
-                System.out.println("不能跟就昵称一样哦~");
+                System.out.println("不能跟旧昵称一样哦~");
             } else {
                 if (checkRegisterInput(name, "name")) {
                     System.out.print("输入您的新密码呢：");
@@ -78,7 +79,7 @@ public class AccountManager {
                         if (checkRegisterInput(password, "password")) {
                             account.setName(name);
                             account.setPassword(password);
-                            System.out.print("更新成功！！！");
+                            System.out.println("更新成功！！！");
                         } else {
                             System.out.println("密码格式无效呢，请重新设置呢~（至少6位数）");
                         }
@@ -89,6 +90,39 @@ public class AccountManager {
             }
         } else {
             System.out.println("您得账号似乎还没注册呢~");
+        }
+    }
+
+    public static void deleteAccount() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("输入您要删除账号的id：");
+        String id = sc.nextLine();
+        if (id.length() == 6) {
+            Account deleteaccount = findAccountById(id);
+            if (deleteaccount != null) {
+                System.out.print("输入您的密码：");
+                String password = sc.nextLine();
+                if (!password.equals(deleteaccount.getPassword())) {
+                    System.out.println("id或密码错误，请重新输入呢~");
+                } else {
+                    System.out.print("您真的要删除吗？（Y/N）");
+                    String check = sc.nextLine();
+                    if (check.equals("Y") | check.equals("y")) {
+                        AccountProperty deleteproperty = findPropertieByPropertyid(deleteaccount.getPropertyid());
+                        properties.remove(deleteproperty);
+                        accounts.remove(deleteaccount);
+                        System.out.println("删除成功，我会想你的~");
+                    } else if (check.equals("N") | check.equals("n")) {
+                        System.out.println("好滴，已终止删除流程~");
+                    } else {
+                        System.out.println("好像输入无效呢（Y/N）");
+                    }
+                }
+            } else {
+                System.out.println("您得账号似乎还没注册呢~");
+            }
+        } else {
+            System.out.println("您似乎输入了无效id哦~");
         }
     }
 }

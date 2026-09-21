@@ -33,7 +33,7 @@ public class AccountVO {
         while (true) {
             userPassword = sc.nextLine();
             if (!checkRegisterInput(userPassword, "password")) {
-                System.out.println("密码格式无效呢，请重新设置呢~（至少6位数）");
+                System.out.print("密码格式无效呢，请重新设置呢~（至少6位数）：");
             } else {
                 break;
             }
@@ -46,7 +46,7 @@ public class AccountVO {
         Scanner sc=new Scanner(System.in);
         System.out.print("请入您的id：");
         String id=sc.nextLine();
-        if (id.length()>=6) {
+        if (id.length()==6) {
             Account loginAccount = findAccountById(id);
             if (loginAccount == null) {
                 System.out.println("您得账号似乎还没注册呢~");

@@ -27,8 +27,9 @@ public class Menu {
                 case 2-> Login();
                 case 3-> accountFindAll(accounts,properties);
                 case 4-> updateAccount();
-                case 5-> System.out.println(choose);
+                case 5-> deleteAccount();
                 case 6-> System.exit(0);
+                default -> System.out.println("输入好像无效呢~");
             }
         }
     }
