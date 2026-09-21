@@ -23,7 +23,7 @@ public class accountUtil {
     //查询账号信息
     public static String getAccount(String accountId) {
         int num = 0;
-        for (int i = 0; i < properties.size(); i++) {
+        for (int i = 0; i < accounts.size(); i++) {
             if (accounts.get(i).getId().equals(accountId)) {
                 num = i;
             }
