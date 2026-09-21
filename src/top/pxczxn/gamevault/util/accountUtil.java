@@ -60,20 +60,19 @@ public class accountUtil {
 
     //通过账号索引找账号
     public static Account findAccountByIndex(int index){
-
-        return accounts.get(index);
+        return index==-1?null:accounts.get(index);
 
     }
 
     //通过资产索引找资产
     public static AccountProperty findPropertyByIndex(int index){
-        return properties.get(index);
+        return index==-1?null:properties.get(index);
     }
 
 
     //通过id找账号索引
     public static int findAccountIndexById(String id){
-        int index = 0;
+        int index = -1;
         for (int i = 0; i < accounts.size(); i++) {
             if (accounts.get(i).getId().equals(id)){
                 index=i;

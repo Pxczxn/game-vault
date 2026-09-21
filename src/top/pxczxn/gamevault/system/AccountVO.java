@@ -50,7 +50,7 @@ public class AccountVO {
         if (id.length()==6) {
             Account loginAccount = findAccountByIndex(findAccountIndexById(id));
             if (loginAccount == null) {
-                System.out.println("您得账号似乎还没注册呢~");
+                System.out.println("您的账号似乎还没注册呢~");
             } else {
                 System.out.print("输入您的密码：");
                 String password = sc.nextLine();

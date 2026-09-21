@@ -30,12 +30,14 @@ public class AccountManager {
         System.out.println("====================== 所有账号列表 ========================");
         for (int i = 0; i < accounts.size(); i++) {
             Account account = findAccountByIndex(i);
-            if (account!=null){
-                System.out.println("id："+account.getId()+
-                                    " 昵称："+account.getName()+
-                                    " 密码："+"*"+
-                                    " 等级："+ (findPropertyByIndex(findAccountIndexById(account.getPropertyid())).getLevel()) +
-                                    " 金币："+(findPropertyByIndex(findAccountIndexById(account.getPropertyid())).getGold()));
+            if (account != null) {
+                System.out.println("id：" + account.getId() +
+                        " 昵称：" + account.getName() +
+                        " 密码：" + "*" +
+                        " 等级：" + findPropertyByIndex(findPropertyIndexByPropertyId(account.getPropertyid())).getLevel() +
+                        " 金币：" + findPropertyByIndex(findPropertyIndexByPropertyId(account.getPropertyid())).getGold());
+            }else {
+                System.out.println("空空如也~~~");
             }
 
         }
@@ -45,24 +47,25 @@ public class AccountManager {
     public static String accountFind(String id) {
         Account account = findAccountByIndex(findAccountIndexById(id));
         AccountProperty property;
-        boolean flag=false;
+        boolean flag = false;
         String accountMessage = "";
         String accountProperty = "";
         String message = "";
-        if (account==null) {
+        if (account == null) {
             System.out.println("您得账号似乎还没注册呢~");
-        }else {
+        } else {
             property = findPropertyByIndex(findAccountIndexById(accountProperty));
-            accountMessage=getAccount(account.getId());
-            accountProperty=getProperties(property.getPropertyid());
-            flag=true;
+            accountMessage = getAccount(account.getId());
+            accountProperty = getProperties(property.getPropertyid());
+            flag = true;
         }
-        if (flag){
-           message = accountMessage+accountProperty;
+        if (flag) {
+            message = accountMessage + accountProperty;
         }
 
         return message;
     }
+
     //修改账号
     public static void updateAccount() {
         Scanner sc = new Scanner(System.in);
