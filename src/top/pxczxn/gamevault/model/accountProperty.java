@@ -1,6 +1,6 @@
 package top.pxczxn.gamevault.model;
 
-public class AccountProperty {
+public class accountProperty {
     private String Propertyid;
     private int level;
     private int gold;
@@ -29,4 +29,6 @@ public class AccountProperty {
     public void setPropertyid(String propertyid) {
         this.Propertyid=propertyid;
     }
+
+    
 }

@@ -1,7 +1,7 @@
 package top.pxczxn.gamevault.model;
 
 
-public class Account {
+public class account {
     private String id;
     private String name;
     private String password;
@@ -39,12 +39,12 @@ public class Account {
         Propertyid = propertyid;
     }
 
-    public Account(){
+    public account() {
     }
 
-    public Account(String id, String name, String password){
-        this.id=id;
-        this.name= name;
-        this.password=password;
+    public account(String id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
     }
 }

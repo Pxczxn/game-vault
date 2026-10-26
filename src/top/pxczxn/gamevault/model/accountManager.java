@@ -5,15 +5,16 @@ import java.util.Scanner;
 
 import static top.pxczxn.gamevault.util.accountUtil.*;
 
-public class AccountManager {
-    public static ArrayList<Account> accounts = new ArrayList<>();
-    public static ArrayList<AccountProperty> properties = new ArrayList<>();
+public class accountManager {
+    public static ArrayList<account> accounts = new ArrayList<>();
+    public static ArrayList<accountProperty> properties = new ArrayList<>();
+
 
     //初始化账号信息
     public static void accountInfo(String userId, String userName, String userPassword) {
         String propertyid = String.valueOf(ramdomSixNum());
-        Account account = accountCreate();
-        AccountProperty property = propertyCreate();
+        account account = accountCreate();
+        accountProperty property = propertyCreate();
         account.setId(userId);
         account.setName(userName);
         account.setPassword(userPassword);
@@ -29,12 +30,9 @@ public class AccountManager {
     public static void accountFindAll() {
         System.out.println("====================== 所有账号列表 ========================");
         for (int i = 0; i < accounts.size(); i++) {
-            Account account = findAccountByIndex(i);
+            account account = findAccountByIndex(i);
             if (account != null) {
-                System.out.println("id：" + account.getId() +
-                        " 昵称：" + account.getName() +
-                        " 密码：" + "*" +
-                        getProperties(account.getPropertyid()));
+                System.out.println("id：" + account.getId() + " 昵称：" + account.getName() + " 密码：" + "*" + getProperties(account.getPropertyid()));
             }
 
         }
@@ -42,12 +40,12 @@ public class AccountManager {
 
     //查询指定账号
     public static String accountFind(String id) {
-        Account account = findAccountByIndex(findAccountIndexById(id));
-        String message="您的账号似乎还没注册呢~";
+        account account = findAccountByIndex(findAccountIndexById(id));
+        String message = "您的账号似乎还没注册呢~";
         if (account != null) {
             String accountMessage = getAccount(account.getId());
             String accountProperty = getProperties(account.getPropertyid());
-            message=accountMessage+accountProperty;
+            message = accountMessage + accountProperty;
         }
 
         return message;
@@ -60,7 +58,7 @@ public class AccountManager {
         String id = sc.nextLine();
         String name;
         String password;
-        Account account = findAccountByIndex(findAccountIndexById(id));
+        account account = findAccountByIndex(findAccountIndexById(id));
         if (account != null) {
             System.out.print("你的新昵称？");
             name = sc.nextLine();
@@ -96,7 +94,7 @@ public class AccountManager {
         System.out.print("输入您要删除账号的id：");
         String id = sc.nextLine();
         if (id.length() == 6) {
-            Account deleteaccount = findAccountByIndex(findAccountIndexById(id));
+            account deleteaccount = findAccountByIndex(findAccountIndexById(id));
             if (deleteaccount != null) {
                 System.out.print("输入您的密码：");
                 String password = sc.nextLine();
@@ -106,7 +104,7 @@ public class AccountManager {
                     System.out.print("您真的要删除吗？（Y/N）");
                     String check = sc.nextLine();
                     if (check.equals("Y") | check.equals("y")) {
-                        AccountProperty deleteproperty = findPropertyByIndex(findPropertyIndexByPropertyId(findAccountByIndex(findAccountIndexById(id)).getPropertyid()));
+                        accountProperty deleteproperty = findPropertyByIndex(findPropertyIndexByPropertyId(findAccountByIndex(findAccountIndexById(id)).getPropertyid()));
                         properties.remove(deleteproperty);
                         accounts.remove(deleteaccount);
                         System.out.println("删除成功，我会想你的~");
@@ -121,6 +119,19 @@ public class AccountManager {
             }
         } else {
             System.out.println("您似乎输入了无效id哦~");
+        }
+    }
+
+    public static void findProperty() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("您要找哪个账号呢（id）？");
+        String findId = sc.nextLine();
+        if (findAccountIndexById(findId) == -1) {
+            System.out.println("账号不存在呢~");
+        } else {
+            System.out.println("尊敬的：" + findId + "(" + accounts.get(findAccountIndexById(findId)).getName() + ")" +
+                    ",您的资产："
+                    + getProperties(findPropertyByIndex(findAccountIndexById(findId)).getPropertyid()));
         }
     }
 }

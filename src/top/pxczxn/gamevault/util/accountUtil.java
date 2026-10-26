@@ -1,23 +1,26 @@
 package top.pxczxn.gamevault.util;
 
-import top.pxczxn.gamevault.model.Account;
-import top.pxczxn.gamevault.model.AccountProperty;
+import top.pxczxn.gamevault.model.account;
+import top.pxczxn.gamevault.model.accountProperty;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
-import static top.pxczxn.gamevault.model.AccountManager.accounts;
-import static top.pxczxn.gamevault.model.AccountManager.properties;
+import static top.pxczxn.gamevault.model.accountManager.accounts;
+import static top.pxczxn.gamevault.model.accountManager.properties;
 
 public class accountUtil {
 
+
     //创建账号
-    public static Account accountCreate() {
-        return new Account();
+    public static account accountCreate() {
+        return new account();
     }
 
     //创建账号资产
-    public static AccountProperty propertyCreate() {
-        return new AccountProperty();
+    public static accountProperty propertyCreate() {
+        return new accountProperty();
     }
 
     //查询账号信息
@@ -59,13 +62,13 @@ public class accountUtil {
     }
 
     //通过账号索引找账号
-    public static Account findAccountByIndex(int index){
+    public static account findAccountByIndex(int index){
         return index==-1?null:accounts.get(index);
 
     }
 
     //通过资产索引找资产
-    public static AccountProperty findPropertyByIndex(int index){
+    public static accountProperty findPropertyByIndex(int index){
         return index==-1?null:properties.get(index);
     }
 
@@ -92,6 +95,36 @@ public class accountUtil {
         return index;
     }
 
+    //排序
+    public static void sortByLevel() {
+        ArrayList<accountProperty> accountPropertiesSort=properties;
+
+        accountPropertiesSort.sort(new Comparator<accountProperty>() {
+            @Override
+            public int compare(accountProperty o1, accountProperty o2) {
+                return Integer.compare(o2.getLevel(),o1.getLevel());
+            }
+        });
+
+        System.out.println("========== 等级排行榜 ==========");
+        System.out.println("排名    用户名       等级");
+        for (int i = 0; i < accountPropertiesSort.size(); i++) {
+
+            String name="";
+            for (int j = 0; j < accounts.size(); j++) {
+                if (accountPropertiesSort.get(i).getPropertyid().equals(accounts.get(j).getPropertyid())) {
+                    name=accounts.get(j).getName();
+                }
+            }
+            System.out.println((i+1)+"  "+name+"  "+accountPropertiesSort.get(i).getLevel());
+        }
+
+    }
+
+
+
+
+
 
     //随机六位数
     public static int ramdomSixNum() {
@@ -99,9 +132,10 @@ public class accountUtil {
         return r.nextInt(100000, 1000000);
     }
 
+    //管理员账号初始化
     public static void adminAccountInfo() {
-        Account adminaccount = accountCreate();
-        AccountProperty accountProperty = propertyCreate();
+        account adminaccount = accountCreate();
+        accountProperty accountProperty = propertyCreate();
         adminaccount.setId("000000");
         adminaccount.setName("破星辰只寻你");
         adminaccount.setPassword("pxczxn000");

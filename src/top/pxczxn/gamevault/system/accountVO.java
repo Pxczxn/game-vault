@@ -1,14 +1,14 @@
 package top.pxczxn.gamevault.system;
 
-import top.pxczxn.gamevault.model.Account;
-import top.pxczxn.gamevault.model.AccountManager;
+import top.pxczxn.gamevault.model.account;
+import top.pxczxn.gamevault.model.accountManager;
 
 import java.util.Scanner;
 
-import static top.pxczxn.gamevault.model.AccountManager.accountFind;
+import static top.pxczxn.gamevault.model.accountManager.accountFind;
 import static top.pxczxn.gamevault.util.accountUtil.*;
 
-public class AccountVO {
+public class accountVO {
     //注册
     public static void Logup() {
         Scanner sc = new Scanner(System.in);
@@ -39,7 +39,7 @@ public class AccountVO {
                 break;
             }
         }
-        AccountManager.accountInfo(userId, userName, userPassword);
+        accountManager.accountInfo(userId, userName, userPassword);
     }
 
     //登录
@@ -48,7 +48,7 @@ public class AccountVO {
         System.out.print("请入您的id：");
         String id=sc.nextLine();
         if (id.length()==6) {
-            Account loginAccount = findAccountByIndex(findAccountIndexById(id));
+            account loginAccount = findAccountByIndex(findAccountIndexById(id));
             if (loginAccount == null) {
                 System.out.println("您的账号似乎还没注册呢~");
             } else {
